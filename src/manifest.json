@@ -1,0 +1,25 @@
+{
+    "name": "Export React",
+    "description": "A Sketch Plugin that exports SVGs as React components.",
+    "author": "Michael Novotny",
+    "authorEmail": "manovotny@gmail.com",
+    "version": "0.0.0",
+    "identifier": "com.manovotny.sketch-export-react",
+    "homepage": "https:/github.com/manovotny/sketch-export-react",
+    "compatibleVersion": 42,
+    "commands": [
+        {
+            "identifier": "export-react",
+            "handler": "run",
+            "script": "plugin.js",
+            "name": "Export React",
+            "handlers": {
+                "run": "run",
+                "actions": {
+                    "ExportSlices": "run"
+                }
+            }
+        }
+    ],
+    "disableCocoaScriptPreprocessor": true
+}
