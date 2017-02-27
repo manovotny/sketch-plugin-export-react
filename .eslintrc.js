@@ -1,3 +1,6 @@
 module.exports = {
-    extends: 'get-off-my-lawn'
+    extends: 'get-off-my-lawn',
+    globals: {
+        log: false
+    }
 };
