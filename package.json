@@ -1,0 +1,59 @@
+{
+  "name": "sketch-export-react",
+  "description": "A Sketch Plugin that exports SVGs as React components.",
+  "version": "0.0.0",
+  "author": {
+    "name": "Michael Novotny",
+    "email": "manovotny@gmail.com",
+    "url": "htts://manovotny.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manovotny/sketch-export-react.git"
+  },
+  "keywords": [
+    "component",
+    "generator",
+    "jsx",
+    "plugin",
+    "react",
+    "sketch"
+  ],
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "prebuild": "npm run reload:off && npm run wildcard:off",
+    "prestart": "npm run reload:on && npm run wildcard:on",
+    "reload:off": "defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool NO",
+    "reload:on": "defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool YES",
+    "lint": "eslint . --ext .json --ext .js",
+    "start": "npm-watch",
+    "test": "npm run lint",
+    "webpack": "webpack --config webpack.config.development.js",
+    "wildcard:off": "defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist actionWildcardsAllowed -bool NO",
+    "wildcard:on": "defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist actionWildcardsAllowed -bool YES"
+  },
+  "watch": {
+    "webpack": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "js,json"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "6.23.1",
+    "babel-loader": "6.3.2",
+    "babel-polyfill": "6.23.0",
+    "babel-preset-es2015": "6.22.0",
+    "babel-preset-stage-0": "6.22.0",
+    "copy-webpack-plugin": "4.0.1",
+    "eslint-config-get-off-my-lawn": "1.5.0",
+    "expand-tilde": "2.0.2",
+    "npm-watch": "0.1.8",
+    "webpack": "2.2.1"
+  }
+}
