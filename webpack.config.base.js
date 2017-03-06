@@ -2,10 +2,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './src/plugin.js',
+    node: {
+        fs: 'empty'
+    },
     module: {
         rules: [
             {
-                exclude: /node_modules/,
+                exclude: new RegExp(`node_modules(?:\\\\|/)(?!svgo)`),
                 test: /\.js$/,
                 use: [
                     'babel-loader'
