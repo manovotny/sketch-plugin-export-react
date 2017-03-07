@@ -1,5 +1,5 @@
 {
-  "name": "sketch-export-react",
+  "name": "sketch-plugin-export-react",
   "description": "A Sketch Plugin that exports SVGs as React components.",
   "version": "0.0.0",
   "author": {
@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/manovotny/sketch-export-react.git"
+    "url": "git+https://github.com/manovotny/sketch-plugin-export-react.git"
   },
   "keywords": [
     "component",
