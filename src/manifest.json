@@ -4,12 +4,12 @@
     "author": "Michael Novotny",
     "authorEmail": "manovotny@gmail.com",
     "version": "0.0.0",
-    "identifier": "com.manovotny.sketch-export-react",
-    "homepage": "https:/github.com/manovotny/sketch-export-react",
+    "identifier": "com.manovotny.sketch-plugin-export-react",
+    "homepage": "https:/github.com/manovotny/sketch-plugin-export-react",
     "compatibleVersion": 42,
     "commands": [
         {
-            "identifier": "export-react",
+            "identifier": "com.manovotny.sketch-plugin-export-react",
             "handler": "run",
             "script": "plugin.js",
             "name": "Export React",
