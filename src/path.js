@@ -49,3 +49,12 @@ export const parse = (path) => {
         name
     }
 };
+
+export const renameExtname = (path, newExtname) => {
+    const parsed = parse(path);
+
+    delete parsed.base;
+    parsed.ext = newExtname;
+
+    return format(parsed);
+};

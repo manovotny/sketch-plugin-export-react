@@ -1,42 +1,42 @@
 import Chance from 'chance';
 
-import {basename, extname, format, parse} from './path';
-
-const chance = new Chance();
-
-const generateRandomPath = () =>
-    chance.n(chance.word, chance.natural({
-        max: 5,
-        min: 1
-    })).join('/');
-
-const generatePathObject = ({root, dir, base, ext, name}) => {
-    const pathObject = {};
-
-    if (root) {
-        pathObject.root = '/';
-    }
-
-    if (dir) {
-        pathObject.dir = `${generateRandomPath()}`;
-    }
-
-    if (name) {
-        pathObject.name = chance.word();
-    }
-
-    if (ext) {
-        pathObject.ext = `.${chance.word()}`;
-    }
-
-    if (base) {
-        pathObject.base = `${chance.word()}.${chance.word()}`;
-    }
-
-    return pathObject;
-};
+import {basename, extname, format, parse, renameExtname} from './path';
 
 describe('path', () => {
+    const chance = new Chance();
+
+    const generateRandomPath = () =>
+        chance.n(chance.word, chance.natural({
+            max: 5,
+            min: 1
+        })).join('/');
+
+    const generatePathObject = ({root, dir, base, ext, name}) => {
+        const pathObject = {};
+
+        if (root) {
+            pathObject.root = '/';
+        }
+
+        if (dir) {
+            pathObject.dir = `${generateRandomPath()}`;
+        }
+
+        if (name) {
+            pathObject.name = chance.word();
+        }
+
+        if (ext) {
+            pathObject.ext = `.${chance.word()}`;
+        }
+
+        if (base) {
+            pathObject.base = `${chance.word()}.${chance.word()}`;
+        }
+
+        return pathObject;
+    };
+
     describe('basename', () => {
         test('returns basename with extension', () => {
             const expectedBasename = `${chance.word()}.${chance.word()}`;
@@ -377,6 +377,17 @@ describe('path', () => {
             expect(actualResult.base).toBe(expectedBase);
             expect(actualResult.name).toBe(expectedName);
             expect(actualResult.ext).toBe(expectedExt);
+        });
+    });
+
+    describe('renameExtname', () => {
+        test('returns path with renamed ext', () => {
+            const expectedExt = `.${chance.word()}`;
+            const path = `${generateRandomPath()}/${chance.word()}.${chance.word()}`;
+
+            const actualPath = renameExtname(path, expectedExt);
+
+            expect(actualPath.endsWith(expectedExt)).toBe(true);
         });
     });
 });
