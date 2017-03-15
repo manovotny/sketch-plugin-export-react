@@ -11,6 +11,7 @@ describe('path', () => {
             min: 1
         })).join('/');
 
+    /* eslint-disable complexity */
     const generatePathObject = ({root, dir, base, ext, name}) => {
         const pathObject = {};
 
@@ -36,9 +37,10 @@ describe('path', () => {
 
         return pathObject;
     };
+    /* eslint-enable */
 
     describe('basename', () => {
-        test('returns basename with extension', () => {
+        test('should return basename with extension', () => {
             const expectedBasename = `${chance.word()}.${chance.word()}`;
             const path = `${generateRandomPath()}/${expectedBasename}`;
 
@@ -47,7 +49,7 @@ describe('path', () => {
             expect(actualBasename).toBe(expectedBasename);
         });
 
-        test('returns basename without extension', () => {
+        test('should return basename without extension', () => {
             const expectedBasename = `${chance.word()}`;
             const extension = `.${chance.word()}`;
             const path = `${generateRandomPath()}/${expectedBasename}${extension}`;
@@ -59,50 +61,50 @@ describe('path', () => {
     });
 
     describe('extname', () => {
-        test('returns ext', () => {
+        test('should return ext', () => {
             const expectedExtension = `.${chance.word()}`;
-            const basename = `${chance.word()}${expectedExtension}`;
-            const path = `${generateRandomPath()}/${basename}`;
+            const base = `${chance.word()}${expectedExtension}`;
+            const path = `${generateRandomPath()}/${base}`;
 
             const actualExtension = extname(path);
 
             expect(actualExtension).toBe(expectedExtension);
         });
 
-        test('returns last ext with multiple exts', () => {
+        test('should return last ext with multiple exts', () => {
             const expectedExtension = `.${chance.word()}`;
-            const basename = `${chance.word()}.${chance.word()}${expectedExtension}`;
-            const path = `${generateRandomPath()}/${basename}`;
+            const base = `${chance.word()}.${chance.word()}${expectedExtension}`;
+            const path = `${generateRandomPath()}/${base}`;
 
             const actualExtension = extname(path);
 
             expect(actualExtension).toBe(expectedExtension);
         });
 
-        test('returns dot if file ends in dot', () => {
-            const expectedExtension = `.`;
-            const basename = `${chance.word()}${expectedExtension}`;
-            const path = `${generateRandomPath()}/${basename}`;
+        test('should return dot if file ends in dot', () => {
+            const expectedExtension = '.';
+            const base = `${chance.word()}${expectedExtension}`;
+            const path = `${generateRandomPath()}/${base}`;
 
             const actualExtension = extname(path);
 
             expect(actualExtension).toBe(expectedExtension);
         });
 
-        test('returns empty string if file has no ext', () => {
+        test('should return empty string if file has no ext', () => {
             const expectedExtension = '';
-            const basename = `${chance.word()}${expectedExtension}`;
-            const path = `${generateRandomPath()}/${basename}`;
+            const base = `${chance.word()}${expectedExtension}`;
+            const path = `${generateRandomPath()}/${base}`;
 
             const actualExtension = extname(path);
 
             expect(actualExtension).toBe(expectedExtension);
         });
 
-        test('returns empty string if file starts with dot', () => {
+        test('should return empty string if file starts with dot', () => {
             const expectedExtension = '';
-            const basename = `.${chance.word()}`;
-            const path = `${generateRandomPath()}/${basename}`;
+            const base = `.${chance.word()}`;
+            const path = `${generateRandomPath()}/${base}`;
 
             const actualExtension = extname(path);
 
@@ -111,13 +113,13 @@ describe('path', () => {
     });
 
     describe('format', () => {
-        test('returns base using base', () => {
+        test('should return base using base', () => {
             const pathObject = generatePathObject({
-                root: false,
-                dir: false,
-                name: false,
-                ext: false,
                 base: true,
+                dir: false,
+                ext: false,
+                name: false,
+                root: false
             });
             const expectedResult = pathObject.base;
 
@@ -126,13 +128,13 @@ describe('path', () => {
             expect(actualResult).toBe(expectedResult);
         });
 
-        test('returns base using name and ext', () => {
+        test('should return base using name and ext', () => {
             const pathObject = generatePathObject({
-                root: false,
-                dir: false,
-                name: true,
-                ext: true,
                 base: false,
+                dir: false,
+                ext: true,
+                name: true,
+                root: false
             });
             const expectedResult = pathObject.name + pathObject.ext;
 
@@ -141,13 +143,13 @@ describe('path', () => {
             expect(actualResult).toBe(expectedResult);
         });
 
-        test('returns name using name', () => {
+        test('should return name using name', () => {
             const pathObject = generatePathObject({
-                root: false,
-                dir: false,
-                name: true,
-                ext: false,
                 base: false,
+                dir: false,
+                ext: false,
+                name: true,
+                root: false
             });
             const expectedResult = pathObject.name;
 
@@ -156,13 +158,13 @@ describe('path', () => {
             expect(actualResult).toBe(expectedResult);
         });
 
-        test('returns ext using ext', () => {
+        test('should return ext using ext', () => {
             const pathObject = generatePathObject({
-                root: false,
-                dir: false,
-                name: false,
-                ext: true,
                 base: false,
+                dir: false,
+                ext: true,
+                name: false,
+                root: false
             });
             const expectedResult = pathObject.ext;
 
@@ -171,13 +173,13 @@ describe('path', () => {
             expect(actualResult).toBe(expectedResult);
         });
 
-        test('returns root and base using root and base', () => {
+        test('should return root and base using root and base', () => {
             const pathObject = generatePathObject({
-                root: true,
-                dir: false,
-                name: false,
-                ext: false,
                 base: true,
+                dir: false,
+                ext: false,
+                name: false,
+                root: true
             });
             const expectedResult = pathObject.root + pathObject.base;
 
@@ -186,13 +188,13 @@ describe('path', () => {
             expect(actualResult).toBe(expectedResult);
         });
 
-        test('returns root and base using root, name, and ext', () => {
+        test('should return root and base using root, name, and ext', () => {
             const pathObject = generatePathObject({
-                root: true,
-                dir: false,
-                name: true,
-                ext: true,
                 base: false,
+                dir: false,
+                ext: true,
+                name: true,
+                root: true
             });
             const expectedResult = pathObject.root + pathObject.name + pathObject.ext;
 
@@ -201,13 +203,13 @@ describe('path', () => {
             expect(actualResult).toBe(expectedResult);
         });
 
-        test('returns root and name using root and name', () => {
+        test('should return root and name using root and name', () => {
             const pathObject = generatePathObject({
-                root: true,
-                dir: false,
-                name: true,
-                ext: false,
                 base: false,
+                dir: false,
+                ext: false,
+                name: true,
+                root: true
             });
             const expectedResult = pathObject.root + pathObject.name;
 
@@ -216,13 +218,13 @@ describe('path', () => {
             expect(actualResult).toBe(expectedResult);
         });
 
-        test('returns root and ext using root and ext', () => {
+        test('should return root and ext using root and ext', () => {
             const pathObject = generatePathObject({
-                root: true,
-                dir: false,
-                name: false,
-                ext: true,
                 base: false,
+                dir: false,
+                ext: true,
+                name: false,
+                root: true
             });
             const expectedResult = pathObject.root + pathObject.ext;
 
@@ -231,13 +233,13 @@ describe('path', () => {
             expect(actualResult).toBe(expectedResult);
         });
 
-        test('returns dir and name using dir, name, and ext', () => {
+        test('should return dir and name using dir, name, and ext', () => {
             const pathObject = generatePathObject({
-                root: false,
-                dir: true,
-                name: true,
-                ext: true,
                 base: false,
+                dir: true,
+                ext: true,
+                name: true,
+                root: false
             });
             const expectedResult = `${pathObject.dir}/${pathObject.name}${pathObject.ext}`;
 
@@ -246,13 +248,13 @@ describe('path', () => {
             expect(actualResult).toBe(expectedResult);
         });
 
-        test('returns dir and base using dir and base', () => {
+        test('should return dir and base using dir and base', () => {
             const pathObject = generatePathObject({
-                root: false,
-                dir: true,
-                name: false,
-                ext: false,
                 base: true,
+                dir: true,
+                ext: false,
+                name: false,
+                root: false
             });
             const expectedResult = `${pathObject.dir}/${pathObject.base}`;
 
@@ -261,13 +263,13 @@ describe('path', () => {
             expect(actualResult).toBe(expectedResult);
         });
 
-        test('returns dir and name using dir and name', () => {
+        test('should return dir and name using dir and name', () => {
             const pathObject = generatePathObject({
-                root: false,
-                dir: true,
-                name: true,
-                ext: false,
                 base: false,
+                dir: true,
+                ext: false,
+                name: true,
+                root: false
             });
             const expectedResult = `${pathObject.dir}/${pathObject.name}`;
 
@@ -276,13 +278,13 @@ describe('path', () => {
             expect(actualResult).toBe(expectedResult);
         });
 
-        test('returns dir and ext using dir and ext', () => {
+        test('should return dir and ext using dir and ext', () => {
             const pathObject = generatePathObject({
-                root: false,
-                dir: true,
-                name: false,
-                ext: true,
                 base: false,
+                dir: true,
+                ext: true,
+                name: false,
+                root: false
             });
             const expectedResult = `${pathObject.dir}/${pathObject.ext}`;
 
@@ -293,7 +295,7 @@ describe('path', () => {
     });
 
     describe('parse', () => {
-        test('root path', () => {
+        test('should parse root path', () => {
             const expectedRoot = '/';
             const dir = generateRandomPath();
             const expectedDir = `/${dir}`;
@@ -311,7 +313,7 @@ describe('path', () => {
             expect(actualResult.ext).toBe(expectedExt);
         });
 
-        test('dir path', () => {
+        test('should parse dir path', () => {
             const expectedRoot = '';
             const expectedDir = `../${generateRandomPath()}`;
             const expectedExt = `.${chance.word()}`;
@@ -328,7 +330,7 @@ describe('path', () => {
             expect(actualResult.ext).toBe(expectedExt);
         });
 
-        test('base path', () => {
+        test('should parse base path', () => {
             const expectedRoot = '';
             const expectedDir = '';
             const expectedExt = `.${chance.word()}`;
@@ -345,7 +347,7 @@ describe('path', () => {
             expect(actualResult.ext).toBe(expectedExt);
         });
 
-        test('name path', () => {
+        test('should parse name path', () => {
             const expectedRoot = '';
             const expectedDir = '';
             const expectedExt = '';
@@ -362,7 +364,7 @@ describe('path', () => {
             expect(actualResult.ext).toBe(expectedExt);
         });
 
-        test('dot path', () => {
+        test('should parse dot path', () => {
             const expectedRoot = '';
             const expectedDir = '';
             const expectedExt = '';
@@ -381,7 +383,7 @@ describe('path', () => {
     });
 
     describe('renameExtname', () => {
-        test('returns path with renamed ext', () => {
+        test('should return path with renamed ext', () => {
             const expectedExt = `.${chance.word()}`;
             const path = `${generateRandomPath()}/${chance.word()}.${chance.word()}`;
 

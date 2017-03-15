@@ -19,9 +19,10 @@ export const extname = (path) => {
     return base.substring(lastIndex, base.length);
 };
 
+/* eslint-disable complexity */
 export const format = (pathObject) => {
     const dir = pathObject.dir || pathObject.root || '';
-    const base = pathObject.base || ((pathObject.name || '') + (pathObject.ext || ''));
+    const base = pathObject.base || (pathObject.name || '') + (pathObject.ext || '');
 
     if (!dir) {
         return base;
@@ -33,6 +34,7 @@ export const format = (pathObject) => {
 
     return `${dir}/${base}`;
 };
+/* eslint-enable */
 
 export const parse = (path) => {
     const root = path.startsWith('/') ? '/' : '';
@@ -42,12 +44,12 @@ export const parse = (path) => {
     const dir = path.endsWith(`/${base}`) ? path.replace(`/${base}`, '') : '';
 
     return {
-        root,
-        dir,
         base,
+        dir,
         ext,
-        name
-    }
+        name,
+        root
+    };
 };
 
 export const renameExtname = (path, newExtname) => {

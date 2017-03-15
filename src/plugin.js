@@ -1,19 +1,19 @@
-import path from 'path-browserify';
-
 import {readFile, writeFile} from './fs-cocoascript';
-import svgo from './svgo-sync';
+import {extname, renameExtname} from './path';
 
 global.run = (context) => {
+    log('Export React!');
+
     context.actionContext.exports.forEach((item) => {
-        if (path.extname(item.path) === '.svg') {
+        if (extname(item.path) === '.svg') {
             const svg = readFile(item.path);
-            // const optimized = svgo(svg);
+            const path = renameExtname(item.path, '.js');
 
             // svgo
             // create react component
             // format js
 
-            writeFile(item.path, 'asdf');
+            writeFile(path, svg);
         }
     });
 };

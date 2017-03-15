@@ -1,10 +1,8 @@
-export const move = (src, dest) => {
-    NSFileManager.defaultManager().moveItemAtPath_toPath_error(src, dest, nil)
-};
+export const move = (src, dest) =>
+    NSFileManager.defaultManager().moveItemAtPath_toPath_error(src, dest, nil);
 
-export const readFile = (file) => {
-    return NSString.stringWithContentsOfFile_encoding_error(file, NSUTF8StringEncoding, nil);
-};
+export const readFile = (file) =>
+    NSString.stringWithContentsOfFile_encoding_error(file, NSUTF8StringEncoding, nil);
 
 export const rename = (oldPath, newPath) => {
     move(oldPath, newPath);
