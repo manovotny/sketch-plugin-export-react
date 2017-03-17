@@ -44,15 +44,11 @@
       "extensions": "js,json"
     }
   },
-  "dependencies": {
-    "deasync": "0.1.9",
-    "svgo": "0.7.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-core": "6.23.1",
     "babel-jest": "19.0.0",
     "babel-loader": "6.3.2",
-    "babel-polyfill": "6.23.0",
     "babel-preset-es2015": "6.22.0",
     "babel-preset-stage-0": "6.22.0",
     "chance": "1.0.6",
