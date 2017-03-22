@@ -13,9 +13,6 @@ module.exports = {
             }
         ]
     },
-    node: {
-        fs: 'empty'
-    },
     output: {
         filename: 'plugin.js'
     },
