@@ -10,7 +10,9 @@ describe('fs-cocoascript', () => {
     test('should read file', () => {
         const expectedFile = chance.string();
         const expectedFileNSString = chance.string();
-        const stringWithContentsOfFileMock = jest.fn();
+        const expectedNSStringContents = chance.string();
+        const expectedContents = chance.string();
+        const stringWithContentsOfFileMock = jest.fn(() => expectedNSStringContents);
 
         global.nil = chance.string();
         global.NSString = {
@@ -18,11 +20,15 @@ describe('fs-cocoascript', () => {
         };
         global.NSUTF8StringEncoding = chance.string();
 
+        utils.nsStringToString = jest.fn((string) =>
+            string === expectedNSStringContents ? expectedContents : undefined
+        );
+
         utils.stringToNSString = jest.fn((file) =>
             file === expectedFile ? expectedFileNSString : undefined
         );
 
-        readFile(expectedFile);
+        const actualContents = readFile(expectedFile);
 
         expect(stringWithContentsOfFileMock).toBeCalled();
         expect(stringWithContentsOfFileMock).toBeCalledWith(
@@ -30,6 +36,7 @@ describe('fs-cocoascript', () => {
             global.NSUTF8StringEncoding,
             global.nil
         );
+        expect(actualContents).toBe(expectedContents);
     });
 
     test('should rename', () => {
