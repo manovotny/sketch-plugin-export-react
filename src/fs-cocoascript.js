@@ -1,14 +1,20 @@
-import {stringToNSString} from './utils';
+import {
+    nsStringToString,
+    stringToNSString
+} from './utils';
 
-export const readFile = (file) =>
-    NSString
+export const readFile = (file) => {
+    const contents = NSString
         .stringWithContentsOfFile_encoding_error(
             stringToNSString(file),
             NSUTF8StringEncoding,
             nil
         );
 
-export const rename = (oldPath, newPath) =>
+    return nsStringToString(contents);
+};
+
+export const rename = (oldPath, newPath) => {
     NSFileManager
         .defaultManager()
         .moveItemAtPath_toPath_error(
@@ -16,8 +22,9 @@ export const rename = (oldPath, newPath) =>
             stringToNSString(newPath),
             nil
         );
+};
 
-export const writeFile = (file, data) =>
+export const writeFile = (file, data) => {
     NSString
         .stringWithString(data)
         .writeToFile_atomically_encoding_error(
@@ -26,3 +33,4 @@ export const writeFile = (file, data) =>
             NSUTF8StringEncoding,
             nil
         );
+};
