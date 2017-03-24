@@ -43,6 +43,7 @@ global.run = (context) => {
                     'removeMetadata',
                     'removeNonInheritableGroupAttrs',
                     {removeRasterImages: {}},
+                    {removeStyleElement: {}},
                     'removeUnknownsAndDefaults',
                     'removeUnusedNS',
                     'removeUselessStrokeAndFill',
