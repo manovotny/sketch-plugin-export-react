@@ -44,7 +44,9 @@
       "extensions": "js,json"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "svgo": "0.7.2"
+  },
   "devDependencies": {
     "babel-core": "6.23.1",
     "babel-jest": "19.0.0",
