@@ -21,17 +21,18 @@
     "sketch"
   ],
   "engines": {
-    "node": ">=6"
+    "node": ">=8.6.0",
+    "yarn": ">=1.0.0"
   },
   "scripts": {
-    "prebuild": "npm run reload:off && npm run wildcard:off",
-    "prestart": "npm run reload:on && npm run wildcard:on",
+    "prebuild": "yarn reload:off && yarn wildcard:off",
+    "prestart": "yarn reload:on && yarn wildcard:on",
     "reload:off": "defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool NO",
     "reload:on": "defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist AlwaysReloadScript -bool YES",
     "jest": "jest",
     "lint": "eslint . --ext .json --ext .js",
     "start": "npm-watch",
-    "test": "npm run lint && npm run jest",
+    "test": "yarn lint && yarn jest",
     "webpack": "webpack --config webpack.config.development.js",
     "wildcard:off": "defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist actionWildcardsAllowed -bool NO",
     "wildcard:on": "defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist actionWildcardsAllowed -bool YES"
